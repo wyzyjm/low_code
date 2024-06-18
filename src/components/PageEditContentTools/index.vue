@@ -1,21 +1,10 @@
 <template>
   <div class="page_edit_content_tools">
     <div class="tools_list">
-      <div
-        v-for="(item, index) in tools"
-        :key="index"
-        class="tools_item"
-        @click="createComponent(item)"
-      >
+      <div v-for="(item, index) in tools" :key="index" class="tools_item" @click="createComponent(item)">
         <img :src="item.icon" class="tools_icon" />
         <span>{{ item.title }}</span>
-        <span
-          >{{
-            previewPageRefs.countComponent
-              ? previewPageRefs.countComponent[toolsItem.componentName]
-              : 0
-          }}
-        </span>
+        <span>{{ previewPageRefs.countComponent ? previewPageRefs.countComponent[toolsItem.componentName] : 0 }} </span>
       </div>
     </div>
   </div>
@@ -24,17 +13,15 @@
 <script setup lang="ts">
 import { inject } from 'vue';
 import { storeToRefs } from 'pinia';
-import tools from './mock';
-import usePreviewPageStore from '@/store/page-edit.js';
+import tools from './mock.js';
+import usePreviewPageStore from '@/store/page-edit';
 
 const mitt = inject('$mitt');
 const previewPage = usePreviewPageStore();
 const previewPageRefs = storeToRefs(previewPage);
 
 const createComponent = (toolsItem) => {
-  const count = previewPageRefs.countComponent
-    ? previewPageRefs.countComponent[toolsItem.componentName]
-    : 0;
+  const count = previewPageRefs.countComponent ? previewPageRefs.countComponent[toolsItem.componentName] : 0;
   // 是否符合创建条件
   if (count === toolsItem.limit) return false;
   mitt.emit('createComponent', toolsItem); // 广播事件

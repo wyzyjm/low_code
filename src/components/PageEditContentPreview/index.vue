@@ -5,6 +5,7 @@
     seamless: 集成父页面样式
    -->
     <iframe
+      id="edit_content_preview_iframe"
       :src="`/edit/preview/${$route.params.id}`"
       frameborder="0"
       class="_content_preview_iframe"
@@ -12,7 +13,20 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { onMounted } from 'vue';
+
+let childIframe = null;
+onMounted(() => {
+  // 获取iframe 内容的window
+  childIframe = document.getElementById('edit_content_preview_iframe').contentWindow;
+  if (childIframe) {
+    setTimeout(() => {
+      childIframe.postMessage({ message: 'init', data: null });
+    }, 100);
+  }
+});
+</script>
 
 <style scoped>
 .page_edit_content_preview {

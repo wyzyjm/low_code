@@ -1,13 +1,20 @@
 <template>
-  <div>预览页面</div>
+  <div>{{ previewPageRefs }}</div>
 </template>
 
 <script setup lang="ts">
-import usePreviewPageStore from '@/store/page-edit.js';
+import { onMounted } from 'vue';
+import { storeToRefs } from 'pinia';
+import usePreviewPageStore from '@/store/page-edit';
 
 const previewPage = usePreviewPageStore();
+const previewPageRefs = storeToRefs(previewPage);
 
-console.log('previewPage', previewPage);
+onMounted(() => {
+  window.addEventListener('message', (event) => {
+    console.log('event', event.data);
+  });
+});
 </script>
 
 <style></style>
