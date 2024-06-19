@@ -3,7 +3,7 @@ import APP from './app.vue';
 import Router from '@/router';
 import pinia from '@/store';
 import '@/assets/css/base.css';
-import mitt from '@/utils/mitt.js';
+import mitt from '@/utils/mitt.ts';
 
 const app = createApp(APP);
 app.use(Router).use(pinia);

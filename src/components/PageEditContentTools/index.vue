@@ -4,7 +4,7 @@
       <div v-for="(item, index) in tools" :key="index" class="tools_item" @click="createComponent(item)">
         <img :src="item.icon" class="tools_icon" />
         <span>{{ item.title }}</span>
-        <span>{{ previewPageRefs.countComponent ? previewPageRefs.countComponent[toolsItem.componentName] : 0 }} </span>
+        <span>{{ previewPageRefs.countComponent ? previewPageRefs.countComponent[item.componentName] : 0 }} </span>
       </div>
     </div>
   </div>
@@ -21,7 +21,16 @@ const previewPage = usePreviewPageStore();
 const previewPageRefs = storeToRefs(previewPage);
 
 const createComponent = (toolsItem) => {
+  console.log(
+    'previewPageRefs.countComponent',
+    previewPageRefs.countComponent,
+    toolsItem.componentName,
+    previewPageRefs.countComponent[toolsItem.componentName]
+  );
+
   const count = previewPageRefs.countComponent ? previewPageRefs.countComponent[toolsItem.componentName] : 0;
+  console.log('count', count);
+
   // 是否符合创建条件
   if (count === toolsItem.limit) return false;
   mitt.emit('createComponent', toolsItem); // 广播事件
