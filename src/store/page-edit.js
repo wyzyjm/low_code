@@ -4,8 +4,10 @@ import { defineStore } from 'pinia';
 const usePreviewPageStore = defineStore('previewPageDate', {
   state: () => {
     return {
+      components: [], // 组件信息
       countComponent: {}, // 组件数量
-      components: [] // 组件
+      currentComponentId: '',
+      currentComponent: null
     };
   },
   getters: {},

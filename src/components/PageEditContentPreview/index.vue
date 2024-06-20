@@ -7,24 +7,25 @@
     <iframe
       id="edit_content_preview_iframe"
       :src="`/edit/preview/${$route.params.id}`"
-      frameborder="0"
+      frameborder="1"
       class="_content_preview_iframe"
     />
   </div>
 </template>
 
-<script setup lang="ts">
-import { onMounted } from 'vue';
+<script setup>
+import { inject, onMounted } from 'vue';
 
+const mitt = inject('$mitt');
 let childIframe = null;
 onMounted(() => {
   // 获取iframe 内容的window
   childIframe = document.getElementById('edit_content_preview_iframe').contentWindow;
   if (childIframe) {
-    setTimeout(() => {
-      childIframe.postMessage({ message: 'init', data: null });
-    }, 100);
+    setTimeout(() => childIframe.postMessage({ message: 'init', data: null }), 100);
   }
+
+  mitt.on('sendMessageToIframe', (data) => childIframe.postMessage(data));
 });
 </script>
 

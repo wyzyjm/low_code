@@ -10,24 +10,18 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { inject } from 'vue';
 import { storeToRefs } from 'pinia';
+
 import tools from './mock.js';
-import usePreviewPageStore from '@/store/page-edit';
+import usePreviewPageStore from '@/store/page-edit.js';
 
 const mitt = inject('$mitt');
 const previewPage = usePreviewPageStore();
 const previewPageRefs = storeToRefs(previewPage);
 
 const createComponent = (toolsItem) => {
-  console.log(
-    'previewPageRefs.countComponent',
-    previewPageRefs.countComponent,
-    toolsItem.componentName,
-    previewPageRefs.countComponent[toolsItem.componentName]
-  );
-
   const count = previewPageRefs.countComponent ? previewPageRefs.countComponent[toolsItem.componentName] : 0;
   console.log('count', count);
 
