@@ -7,9 +7,9 @@
 </template>
 
 <script setup lang="ts">
-import PageEditContentTools from '@/components/PageEditContentTools/index.vue';
-import PageEditContentPreview from '@/components/PageEditContentPreview/index.vue';
-import PageEditContentPanel from '@/components/PageEditContentPanel/index.vue';
+import PageEditContentTools from '@/components/PageEditContentTools/index.vue'
+import PageEditContentPreview from '@/components/PageEditContentPreview/index.vue'
+import PageEditContentPanel from '@/components/PageEditContentPanel/index.vue'
 </script>
 
 <style scoped>

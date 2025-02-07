@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
 import { RouterLink } from 'vue-router';
-import pageList from '@/mock/pageList.js';
+import pageList from '@/mock/pageList.ts';
 </script>
 
 <style scoped>

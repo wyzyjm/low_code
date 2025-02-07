@@ -7,36 +7,36 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
-import { storeToRefs } from 'pinia';
-import usePreviewPageStore from '@/store/page-edit.js';
+import { onMounted } from 'vue'
+import { storeToRefs } from 'pinia'
+import usePreviewPageStore from '@/store/page-edit'
 
-const previewPage = usePreviewPageStore();
-let { components } = storeToRefs(previewPage); // 解构使用
+const previewPage = usePreviewPageStore()
+let { components } = storeToRefs(previewPage) // 解构使用
 
-let parent = null;
+let parent = null
 
 function createComponent(data) {
-  components.value.push(data);
+  components.value.push(data)
 }
 onMounted(() => {
   window.addEventListener('message', (event) => {
-    parent = event.source;
+    parent = event.source
     if (event.data) {
-      const { message, data } = event.data;
+      const { message, data } = event.data
       if (message && message !== 'init') {
         switch (message) {
           case 'createComponent':
-            createComponent(data);
-            break;
+            createComponent(data)
+            break
 
           default:
-            break;
+            break
         }
       }
     }
-  });
-});
+  })
+})
 </script>
 
 <style></style>

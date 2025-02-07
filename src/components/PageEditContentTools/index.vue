@@ -10,25 +10,25 @@
   </div>
 </template>
 
-<script setup>
-import { inject } from 'vue';
-import { storeToRefs } from 'pinia';
+<script setup lang="ts">
+import { inject } from 'vue'
+import { storeToRefs } from 'pinia'
 
-import tools from './mock.js';
-import usePreviewPageStore from '@/store/page-edit.js';
+import tools from './mock.js'
+import usePreviewPageStore from '@/store/page-edit.js'
 
-const mitt = inject('$mitt');
-const previewPage = usePreviewPageStore();
-const previewPageRefs = storeToRefs(previewPage);
+const mitt = inject('$mitt')
+const previewPage = usePreviewPageStore()
+const previewPageRefs = storeToRefs(previewPage)
 
 const createComponent = (toolsItem) => {
-  const count = previewPageRefs.countComponent ? previewPageRefs.countComponent[toolsItem.componentName] : 0;
-  console.log('count', count);
+  const count = previewPageRefs.countComponent ? previewPageRefs.countComponent[toolsItem.componentName] : 0
+  console.log('count', count)
 
   // 是否符合创建条件
-  if (count === toolsItem.limit) return false;
-  mitt.emit('createComponent', toolsItem); // 广播事件
-};
+  if (count === toolsItem.limit) return false
+  mitt.emit('createComponent', toolsItem) // 广播事件
+}
 </script>
 
 <style scoped>

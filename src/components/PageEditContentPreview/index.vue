@@ -13,20 +13,20 @@
   </div>
 </template>
 
-<script setup>
-import { inject, onMounted } from 'vue';
+<script setup lang="ts">
+import { inject, onMounted } from 'vue'
 
-const mitt = inject('$mitt');
-let childIframe = null;
+const mitt = inject('$mitt')
+let childIframe = null
 onMounted(() => {
   // 获取iframe 内容的window
-  childIframe = document.getElementById('edit_content_preview_iframe').contentWindow;
+  childIframe = document.getElementById('edit_content_preview_iframe').contentWindow
   if (childIframe) {
-    setTimeout(() => childIframe.postMessage({ message: 'init', data: null }), 100);
+    setTimeout(() => childIframe.postMessage({ message: 'init', data: null }), 100)
   }
 
-  mitt.on('sendMessageToIframe', (data) => childIframe.postMessage(data));
-});
+  mitt.on('sendMessageToIframe', (data) => childIframe.postMessage(data))
+})
 </script>
 
 <style scoped>
